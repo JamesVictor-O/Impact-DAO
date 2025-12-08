@@ -1,43 +1,149 @@
 import React from "react";
-import { Activity } from "lucide-react";
+import { Twitter, MessageSquare, Code } from "lucide-react";
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-background-dark border-t border-white/10 py-12 px-4">
-      <div className="max-w-6xl mx-auto flex flex-col items-center text-center gap-6">
-        <div className="flex items-center gap-2">
-          <Activity className="text-primary w-6 h-6" />
-          <h2 className="text-white text-lg font-bold">SemaTell</h2>
+    <footer className="bg-[#0b120f] border-t border-[#1f2b24] py-12 md:py-16 px-6 md:px-20 lg:px-40 text-xs md:text-sm">
+      <div className="max-w-[1200px] mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 md:gap-12">
+        {/* Brand Column */}
+        <div className="col-span-1 md:col-span-1">
+          <div className="flex items-center gap-2 text-white mb-4 md:mb-6">
+            <div className="size-6 text-primary">
+              <svg
+                fill="none"
+                viewBox="0 0 48 48"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M42.1739 20.1739L27.8261 5.82609C29.1366 7.13663 28.3989 10.1876 26.2002 13.7654C24.8538 15.9564 22.9595 18.3449 20.6522 20.6522C18.3449 22.9595 15.9564 24.8538 13.7654 26.2002C10.1876 28.3989 7.13663 29.1366 5.82609 27.8261L20.1739 42.1739C21.4845 43.4845 24.5355 42.7467 28.1133 40.548C30.3042 39.2016 32.6927 37.3073 35 35C37.3073 32.6927 39.2016 30.3042 40.548 28.1133C42.7467 24.5355 43.4845 21.4845 42.1739 20.1739Z"
+                  fill="currentColor"
+                ></path>
+              </svg>
+            </div>
+            <span className="font-bold text-base md:text-lg font-display">
+              ImpactDAO
+            </span>
+          </div>
+          <p className="text-gray-500 mb-4 md:mb-6 max-w-sm text-xs md:text-sm">
+            Decentralized quadratic funding for local public goods. Built on
+            trust.
+          </p>
+          <div className="flex gap-4">
+            <a
+              href="#"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <Twitter size={18} />
+            </a>
+            <a
+              href="#"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <MessageSquare size={18} />
+            </a>
+            <a
+              href="#"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              <Code size={18} />
+            </a>
+          </div>
         </div>
 
-        <div className="flex gap-8 text-gray-400">
-          <a href="#" className="text-sm hover:text-primary transition-colors">
-            Markets
-          </a>
-          <a href="#" className="text-sm hover:text-primary transition-colors">
-            Leaderboard
-          </a>
-          <a href="#" className="text-sm hover:text-primary transition-colors">
-            About
-          </a>
+        {/* Links Columns */}
+        <div>
+          <h4 className="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">
+            Platform
+          </h4>
+          <ul className="flex flex-col gap-2 md:gap-3 text-gray-400">
+            <li>
+              <a
+                href="#explore-projects"
+                className="hover:text-primary transition-colors"
+              >
+                Explore Projects
+              </a>
+            </li>
+            <li>
+              <a
+                href="#how-it-works"
+                className="hover:text-primary transition-colors"
+              >
+                How it Works
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Quadratic Funding
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Tokenomics
+              </a>
+            </li>
+          </ul>
         </div>
 
-        <div className="flex gap-6 text-gray-400 mt-2">
-          <a href="#" className="hover:text-white transition-colors">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"></path>
-            </svg>
-          </a>
-          <a href="#" className="hover:text-white transition-colors">
-            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.85s-.012 3.584-.07 4.85c-.148 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07s-3.584-.012-4.85-.07c-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.85s.012-3.584.07-4.85c.149-3.225 1.664-4.771 4.919-4.919C8.416 2.175 8.796 2.163 12 2.163zm0 1.802c-3.552 0-3.922.016-5.292.076-2.439.111-3.693 1.354-3.804 3.803-.06 1.37-.076 1.74-.076 5.292s.016 3.922.076 5.292c.111 2.44 1.365 3.693 3.803 3.804 1.37.06 1.74.076 5.292.076s3.922-.016 5.292-.076c2.44-.111 3.693-1.365 3.804-3.803.06-1.37.076-1.74.076-5.292s-.016-3.922-.076-5.292c-.111-2.44-1.365-3.693-3.804-3.804-1.37-.06-1.74-.076-5.292-.076zm0 4.636a5.397 5.397 0 100 10.794 5.397 5.397 0 000-10.794zm0 8.991a3.597 3.597 0 110-7.194 3.597 3.597 0 010 7.194zm6.406-9.155a1.242 1.242 0 100 2.484 1.242 1.242 0 000-2.484z"></path>
-            </svg>
-          </a>
+        <div>
+          <h4 className="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">
+            Governance
+          </h4>
+          <ul className="flex flex-col gap-2 md:gap-3 text-gray-400">
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                DAO Forum
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Vote
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Transparency Reports
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Audits
+              </a>
+            </li>
+          </ul>
         </div>
 
-        <p className="text-xs text-gray-500 mt-6">
-          © 2024 SemaTell Inc. All rights reserved.
-        </p>
+        <div>
+          <h4 className="text-white font-bold mb-3 md:mb-4 text-sm md:text-base">
+            Resources
+          </h4>
+          <ul className="flex flex-col gap-2 md:gap-3 text-gray-400">
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Documentation
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Help Center
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Brand Assets
+              </a>
+            </li>
+            <li>
+              <a href="#" className="hover:text-primary transition-colors">
+                Terms of Service
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div className="max-w-[1200px] mx-auto mt-8 md:mt-12 pt-6 md:pt-8 border-t border-[#1f2b24] text-center text-[11px] md:text-xs text-gray-600">
+        © {new Date().getFullYear()} ImpactDAO. All rights reserved.
       </div>
     </footer>
   );

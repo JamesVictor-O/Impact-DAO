@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { FarcasterReadyProvider } from "../components/FarcasterReadyProvider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bodyFont = Manrope({
+  variable: "--font-body",
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const displayFont = Space_Grotesk({
+  variable: "--font-display",
   subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
-  title: "SemaTell | Prediction Markets",
+  title: "Proof of Impact | Impact DAO Funding Platform",
   description:
-    "Prophet is a cultural prediction market where your knowledge is rewarded.",
+    "Quadratic funding for local public goods. Amplify impact for verified SMEs and community projects.",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${bodyFont.variable} ${displayFont.variable} antialiased`}
       >
         <FarcasterReadyProvider>{children}</FarcasterReadyProvider>
       </body>

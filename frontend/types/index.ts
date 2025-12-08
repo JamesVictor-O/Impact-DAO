@@ -1,3 +1,5 @@
+import type React from "react";
+
 export interface Market {
   id: string;
   title: string;
@@ -14,6 +16,33 @@ export interface User {
   name: string;
   balance: number;
   portfolioValue: number;
+}
+
+// Landing page / Impact DAO types
+
+export interface Project {
+  id: number;
+  title: string;
+  description: string;
+  location: string;
+  category: string;
+  imageUrl: string;
+  status: "Verified" | "Pending";
+  raised: number;
+  match: number | "pending";
+  target: number;
+}
+
+export interface Step {
+  id: number;
+  title: string;
+  description: string;
+  icon: React.ElementType;
+}
+
+export interface Stat {
+  value: string;
+  label: string;
 }
 export interface userData {
   id: string;

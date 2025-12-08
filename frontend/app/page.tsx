@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { Header } from "../components/Layout/Header";
 import { Footer } from "../components/Layout/Footer";
+import { SmeDashboard } from "../components/SME/Dashboard";
 import { LandingPage } from "../components/Layout/Landingpage";
-import { Dashboard } from "../components/Dashbaord/Dashboard";
 import type { User } from "../types";
 
 type View = "landing" | "portfolio";
@@ -44,11 +44,7 @@ export default function Home() {
       />
 
       <main className="flex-1">
-        {view === "landing" ? (
-          <LandingPage onStart={handleLogin} />
-        ) : (
-          <Dashboard />
-        )}
+         <LandingPage onStart={handleLogin} />
       </main>
 
       <Footer />

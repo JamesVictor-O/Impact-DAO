@@ -5,8 +5,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-mono: system-ui, -apple-system, BlinkMacSystemFont, "SF Mono", "Menlo",
+    "Monaco", "Consolas", "Liberation Mono", "Courier New", monospace;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -40,8 +41,9 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --color-background-dark: #221e10;
-  --color-background-light: #f8f8f5;
+  /* Impact DAO / Proof of Impact landing palette */
+  --color-background-light: #f6f8f7;
+  --color-background-dark: #102218;
   --color-success: #2ecc71;
   --color-danger: #e74c3c;
 }
@@ -54,8 +56,9 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  /* Brand primary for Impact DAO / SME dashboard */
+  --primary: #13ec6d;
+  --primary-foreground: #05130a;
   --secondary: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
@@ -88,8 +91,8 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
+  --primary: #13ec6d;
+  --primary-foreground: #05130a;
   --secondary: oklch(0.269 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
@@ -121,6 +124,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-body), system-ui, -apple-system, sans-serif;
   }
 }
 
@@ -129,4 +133,90 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(244, 192, 37, 0.1);
+}
+
+@layer utilities {
+  /* Custom colors used by the Impact DAO landing page */
+  .bg-background-light {
+    background-color: var(--color-background-light);
+  }
+  .bg-background-dark {
+    background-color: var(--color-background-dark);
+  }
+  .bg-card-dark {
+    background-color: #162b1f;
+  }
+  .bg-surface-dark {
+    background-color: #162b20;
+  }
+  .bg-surface-hover {
+    background-color: #1c3428;
+  }
+  .border-border-dark {
+    border-color: #28392f;
+  }
+  .border-surface-border {
+    border-color: #28392f;
+  }
+  .text-text-grey {
+    color: #9db9a8;
+  }
+  .text-text-muted {
+    color: #9db9a8;
+  }
+  .bg-primary-soft {
+    background-color: rgba(19, 236, 109, 0.1);
+  }
+  .bg-primary-hover {
+    background-color: #0fb654;
+  }
+
+  /* Display font utility for headings */
+  .font-display {
+    font-family: var(--font-display), system-ui, -apple-system, sans-serif;
+  }
+
+  /* Simple animation helpers */
+  @keyframes bounce-slow {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+  }
+
+  @keyframes bounce-slower {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .animate-bounce-slow {
+    animation: bounce-slow 3s infinite;
+  }
+
+  .animate-bounce-slower {
+    animation: bounce-slower 4s infinite;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out both;
+  }
 }

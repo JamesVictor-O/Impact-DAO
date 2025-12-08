@@ -1,11 +1,13 @@
 import React from "react";
 import { VerificationCard } from "./VerificationCard";
 import { GovernanceCard } from "./GovernanceCard";
+import type { VerificationItem, Proposal } from "./types";
 import {
-  VerificationItem,
-  Proposal,
-} from "./types";
-import { ValidatorProfile, NetworkStatus, ActivityLog } from "./ValidatorPanels";
+  ValidatorProfile,
+  NetworkStatus,
+  ActivityLog,
+} from "./ValidatorPanels";
+import { Button } from "../ui/button";
 
 const VERIFICATION_ITEMS: VerificationItem[] = [
   {
@@ -162,5 +164,3 @@ export const VerificationPage: React.FC = () => {
     </div>
   );
 };
-
-

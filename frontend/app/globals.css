@@ -152,16 +152,25 @@
   .bg-surface-hover {
     background-color: #1c3428;
   }
+  .bg-surface-highlight {
+    background-color: #28392f;
+  }
   .border-border-dark {
     border-color: #28392f;
   }
   .border-surface-border {
     border-color: #28392f;
   }
+  .border-surface-highlight {
+    border-color: #28392f;
+  }
   .text-text-grey {
     color: #9db9a8;
   }
   .text-text-muted {
+    color: #9db9a8;
+  }
+  .text-text-secondary {
     color: #9db9a8;
   }
   .bg-primary-soft {
@@ -218,5 +227,25 @@
 
   .animate-fade-in {
     animation: fade-in 0.4s ease-out both;
+  }
+
+  /* Shimmer effect for progress bars */
+  @keyframes shimmer {
+    0% {
+      transform: translateX(-100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s infinite;
+    background: linear-gradient(
+      to right,
+      transparent,
+      rgba(255, 255, 255, 0.4),
+      transparent
+    );
   }
 }

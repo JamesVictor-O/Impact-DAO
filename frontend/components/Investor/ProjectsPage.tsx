@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { ProjectsHero } from "./ProjectsHero";
-import { ProjectsStatsStrip } from "./ProjectsStatsStrip";
+
 import { ProjectsFilterSidebar } from "./ProjectsFilterSidebar";
 import { InvestorProjectCard } from "./ProjectCard";
 import { PROJECTS } from "./constants";
@@ -69,7 +69,7 @@ export const InvestorProjectsPage: React.FC = () => {
   return (
     <div className="flex flex-col min-h-screen bg-background-dark text-white">
       <ProjectsHero />
-      <ProjectsStatsStrip />
+     
 
       <section className="mx-auto flex w-full max-w-[1440px] flex-col gap-8 px-4 py-8 md:px-8 lg:px-16">
         <div className="flex flex-col lg:flex-row gap-8">

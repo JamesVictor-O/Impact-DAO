@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import type { Project } from "./types";
 import { CheckCircle2, Bolt, AlertTriangle, Info } from "lucide-react";
 
@@ -95,10 +96,13 @@ export const InvestorProjectCard: React.FC<ProjectCardProps> = ({
         </div>
 
         <div className="mt-auto flex gap-3">
-          <button className="flex-1 rounded-lg bg-background-dark/70 py-2 text-xs md:text-sm font-semibold text-white hover:bg-surface-dark transition-colors flex items-center justify-center gap-1">
+          <Link
+            href={`/investor/projects/${project.id}`}
+            className="flex-1 rounded-lg bg-background-dark/70 py-2 text-xs md:text-sm font-semibold text-white hover:bg-surface-dark transition-colors flex items-center justify-center gap-1"
+          >
             <Info className="h-3.5 w-3.5" />
             {isMilestonePending ? "Review" : "Details"}
-          </button>
+          </Link>
           {isMilestonePending ? (
             <button
               className="flex-1 rounded-lg border border-primary text-primary py-2 text-xs md:text-sm font-bold hover:bg-primary/10 transition-colors"

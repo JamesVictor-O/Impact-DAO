@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   FolderOpen,
+  ShieldCheck,
   WalletCards,
   BarChart3,
   UserCircle2,
@@ -23,6 +24,11 @@ const NAV_ITEMS: NavItem[] = [
     icon: <LayoutDashboard size={18} />,
     label: "Portfolio",
     href: "/investor/portfolio",
+  },
+  {
+    icon: <ShieldCheck size={18} />,
+    label: "Verification",
+    href: "/investor/verification",
   },
   {
     icon: <WalletCards size={18} />,

@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   FolderOpen,
@@ -10,41 +11,34 @@ import {
   BadgeCheck,
 } from "lucide-react";
 
-interface NavItemProps {
+interface NavItem {
   icon: React.ReactNode;
   label: string;
-  active?: boolean;
+  href: string;
 }
 
-const NavItem: React.FC<NavItemProps> = ({ icon, label, active }) => {
-  return (
-    <a
-      href="#"
-      className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-colors group border ${
-        active
-          ? "bg-primary-soft border-primary/10"
-          : "border-transparent hover:bg-white/5"
-      }`}
-    >
-      <span
-        className={
-          active ? "text-primary" : "text-text-muted group-hover:text-white"
-        }
-      >
-        {icon}
-      </span>
-      <p
-        className={`text-sm font-medium ${
-          active ? "text-white" : "text-text-muted group-hover:text-white"
-        }`}
-      >
-        {label}
-      </p>
-    </a>
-  );
-};
+const NAV_ITEMS: NavItem[] = [
+  { icon: <LayoutDashboard size={20} />, label: "Dashboard", href: "/sme" },
+  {
+    icon: <FolderOpen size={20} />,
+    label: "All Projects",
+    href: "/sme/projects",
+  },
+  {
+    icon: <Wallet size={20} />,
+    label: "Wallet & Funding",
+    href: "/sme/wallet",
+  },
+  {
+    icon: <ShieldCheck size={20} />,
+    label: "Verification Logs",
+    href: "/sme/verification",
+  },
+  { icon: <Settings size={20} />, label: "Settings", href: "/sme/settings" },
+];
 
 export const SmeSidebar: React.FC = () => {
+  const pathname = usePathname();
   return (
     <aside className="w-72 hidden lg:flex flex-col bg-surface-dark border-r border-surface-border h-full justify-between p-4 z-20">
       <div className="flex flex-col gap-6">
@@ -72,15 +66,42 @@ export const SmeSidebar: React.FC = () => {
 
         {/* Navigation Links */}
         <nav className="flex flex-col gap-2">
-          <NavItem
-            active
-            icon={<LayoutDashboard size={20} />}
-            label="Dashboard"
-          />
-          <NavItem icon={<FolderOpen size={20} />} label="All Projects" />
-          <NavItem icon={<Wallet size={20} />} label="Wallet & Funding" />
-          <NavItem icon={<ShieldCheck size={20} />} label="Verification Logs" />
-          <NavItem icon={<Settings size={20} />} label="Settings" />
+          {NAV_ITEMS.map((item) => {
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/sme" && pathname.startsWith(item.href));
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`flex items-center gap-3 px-3 py-3 rounded-lg transition-colors group border ${
+                  isActive
+                    ? "bg-primary-soft border-primary/10"
+                    : "border-transparent hover:bg-white/5"
+                }`}
+              >
+                <span
+                  className={
+                    isActive
+                      ? "text-primary"
+                      : "text-text-muted group-hover:text-white"
+                  }
+                >
+                  {item.icon}
+                </span>
+                <p
+                  className={`text-sm font-medium ${
+                    isActive
+                      ? "text-white"
+                      : "text-text-muted group-hover:text-white"
+                  }`}
+                >
+                  {item.label}
+                </p>
+              </Link>
+            );
+          })}
         </nav>
       </div>
 

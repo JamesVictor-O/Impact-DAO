@@ -1,10 +1,53 @@
-import React from "react";
-import { Search, Bell, WalletCards } from "lucide-react";
+import React, { useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  Search,
+  Bell,
+  WalletCards,
+  Menu,
+  X,
+  FolderOpen,
+  LayoutDashboard,
+  ShieldCheck,
+  BarChart3,
+} from "lucide-react";
 import { Button } from "../ui/button";
 
 export const InvestorHeader: React.FC = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const MOBILE_NAV = [
+    {
+      label: "Projects",
+      href: "/investor",
+      icon: <FolderOpen className="h-4 w-4" />,
+    },
+    {
+      label: "Portfolio",
+      href: "/investor/portfolio",
+      icon: <LayoutDashboard className="h-4 w-4" />,
+    },
+    {
+      label: "Verification",
+      href: "/investor/verification",
+      icon: <ShieldCheck className="h-4 w-4" />,
+    },
+    {
+      label: "Wallet",
+      href: "/investor/wallet",
+      icon: <WalletCards className="h-4 w-4" />,
+    },
+    {
+      label: "Reports",
+      href: "/investor/reports",
+      icon: <BarChart3 className="h-4 w-4" />,
+    },
+  ];
+
   return (
-    <header className="h-16 flex items-center justify-between border-b border-surface-border bg-background-dark/95 backdrop-blur px-4 md:px-6 shrink-0 z-10 sticky top-0">
+    <header className="relative h-16 flex items-center justify-between border-b border-surface-border bg-background-dark/95 backdrop-blur px-4 md:px-6 shrink-0 z-10 sticky top-0">
       {/* Search */}
       <div className="flex-1 max-w-md md:max-w-lg">
         <div className="relative group">
@@ -18,7 +61,7 @@ export const InvestorHeader: React.FC = () => {
       </div>
 
       {/* Right Actions */}
-      <div className="flex items-center gap-3 md:gap-4 ml-3 md:ml-6">
+      <div className="flex items-center gap-2 md:gap-4 ml-3 md:ml-6">
         <button className="relative p-2 text-slate-400 hover:text-white transition-colors rounded-full hover:bg-surface-hover">
           <Bell className="h-5 w-5" />
           <span className="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-background-dark" />
@@ -37,11 +80,53 @@ export const InvestorHeader: React.FC = () => {
 
         <Button
           size="sm"
-          className="bg-primary hover:bg-primary-hover text-[#111814] font-bold text-xs md:text-sm shadow-lg shadow-primary/20 whitespace-nowrap"
+          className="hidden xs:inline-flex bg-primary hover:bg-primary-hover text-[#111814] font-bold text-xs md:text-sm shadow-lg shadow-primary/20 whitespace-nowrap"
         >
           Connect Wallet
         </Button>
+
+        {/* Mobile menu toggle */}
+        <button
+          type="button"
+          className="md:hidden p-2 rounded-full text-slate-200 hover:bg-surface-hover transition-colors"
+          onClick={() => setIsMobileMenuOpen((open) => !open)}
+          aria-label="Toggle navigation"
+        >
+          {isMobileMenuOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
+        </button>
       </div>
+
+      {/* Mobile nav overlay */}
+      {isMobileMenuOpen && (
+        <div className="absolute left-0 right-0 top-16 md:hidden bg-background-dark border-b border-surface-border px-4 pb-4 pt-3 space-y-2 shadow-xl">
+          {MOBILE_NAV.map((item) => {
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/investor" && pathname.startsWith(item.href));
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`flex items-center justify-between rounded-lg px-3 py-2 text-sm ${
+                  isActive
+                    ? "bg-primary-soft text-primary font-semibold"
+                    : "text-text-muted hover:bg-surface-hover hover:text-white"
+                }`}
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                <span className="flex items-center gap-2">
+                  {item.icon}
+                  {item.label}
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      )}
     </header>
   );
 };

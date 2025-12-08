@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
@@ -8,7 +9,6 @@ import {
   WalletCards,
   BarChart3,
   UserCircle2,
-  Globe2,
 } from "lucide-react";
 
 interface NavItem {
@@ -51,8 +51,15 @@ export const InvestorSidebar: React.FC = () => {
         <div className="flex flex-col gap-6">
           {/* Brand */}
           <div className="flex gap-3 items-center px-2">
-            <div className="bg-linear-to-br from-primary to-emerald-500 aspect-square rounded-full size-10 flex items-center justify-center">
-              <Globe2 className="text-white h-5 w-5" />
+            <div className="aspect-square rounded-full size-10 overflow-hidden bg-background-dark flex items-center justify-center">
+              <Image
+                src="/Logo.png"
+                alt="ImpactDAO logo"
+                width={40}
+                height={40}
+                className="h-8 w-auto"
+                priority
+              />
             </div>
             <div className="flex flex-col">
               <h1 className="text-white text-lg font-bold leading-none tracking-tight">

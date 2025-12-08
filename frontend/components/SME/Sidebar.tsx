@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import {
   LayoutDashboard,
   FolderOpen,
@@ -106,10 +107,13 @@ export const SmeSidebar: React.FC = () => {
         </div>
 
         {/* Action Button */}
-        <button className="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-4 bg-primary hover:bg-primary-hover text-[#111814] text-sm font-bold transition-all shadow-lg shadow-primary/20">
+        <Link
+          href="/sme/create"
+          className="flex w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-lg h-12 px-4 bg-primary hover:bg-primary-hover text-[#111814] text-sm font-bold transition-all shadow-lg shadow-primary/20"
+        >
           <PlusCircle size={20} />
           <span className="truncate">Create Proposal</span>
-        </button>
+        </Link>
       </div>
     </aside>
   );

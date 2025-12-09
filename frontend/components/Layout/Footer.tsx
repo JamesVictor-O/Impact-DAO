@@ -19,7 +19,7 @@ export const Footer: React.FC = () => {
               />
             </div>
             <span className="font-bold text-base md:text-lg font-display">
-              ImpactDAO
+              ImpactProof
             </span>
           </div>
           <p className="text-gray-500 mb-4 md:mb-6 max-w-sm text-xs md:text-sm">
@@ -141,7 +141,7 @@ export const Footer: React.FC = () => {
       </div>
 
       <div className="max-w-[1200px] mx-auto mt-8 md:mt-12 pt-6 md:pt-8 border-t border-[#1f2b24] text-center text-[11px] md:text-xs text-gray-600">
-        © {new Date().getFullYear()} ImpactDAO. All rights reserved.
+        © {new Date().getFullYear()} ImpactProof. All rights reserved.
       </div>
     </footer>
   );

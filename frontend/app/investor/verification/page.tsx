@@ -15,3 +15,4 @@ const InvestorVerificationPage = () => {
 export default InvestorVerificationPage;
 
 
+

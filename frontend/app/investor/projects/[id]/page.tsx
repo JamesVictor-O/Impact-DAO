@@ -20,3 +20,4 @@ const InvestorProjectDetailsRoute = () => {
 export default InvestorProjectDetailsRoute;
 
 
+

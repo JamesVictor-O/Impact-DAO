@@ -49,7 +49,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
         <div className="flex flex-col">
           <span className="text-sm md:text-base font-bold leading-tight tracking-[-0.02em] font-display">
-            ImpactDAO
+            ImpactProof
           </span>
           <span className="hidden md:inline text-[11px] text-slate-500 dark:text-text-grey">
             Quadratic Funding

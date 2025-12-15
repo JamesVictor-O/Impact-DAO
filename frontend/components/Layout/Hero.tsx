@@ -1,16 +1,47 @@
+"use client";
+
 import React from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { DollarSign, TrendingUp } from "lucide-react";
+import { usePrivy, useLogin } from "@privy-io/react-auth";
 import { Button } from "../ui/button";
 
 const HERO_IMAGE = "/Image1.jpeg";
 
 interface HeroProps {
-  onStart: () => void;
+  onStart?: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onStart }) => {
-    
+  const router = useRouter();
+  const { ready, authenticated } = usePrivy();
+  const { login: privyLogin } = useLogin({
+    onComplete: () => {
+      // Wallet connected, can now proceed with actions
+    },
+  });
+
+  const handleConnectWallet = () => {
+    if (ready && !authenticated) {
+      privyLogin();
+    } else if (!ready) {
+      console.warn(
+        "Privy is not ready yet. Please ensure NEXT_PUBLIC_PRIVY_APP_ID is set in your environment variables."
+      );
+    }
+  };
+
+  const handleStartProject = () => {
+    router.push("/sme");
+  };
+
+  const handleFundPublicGoods = () => {
+    router.push("/investor");
+  };
+
+  const isWalletConnected = ready && authenticated;
+
   return (
     <section className="relative w-full px-6 py-12 md:px-20 lg:px-40 flex justify-center bg-background-light dark:bg-background-dark overflow-hidden">
       <div className="flex flex-col max-w-[1200px] flex-1">
@@ -27,20 +58,36 @@ export const Hero: React.FC<HeroProps> = ({ onStart }) => {
                   Quadratic Funding
                 </span>
               </h1>
-              <p className="text-slate-600 dark:text-text-grey text-base md:text-lg leading-relaxed max-w-xl">
+              <p className="text-slate-400 dark:text-text-grey text-base md:text-lg leading-relaxed max-w-xl">
                 A platform where community donations unlock matching funds for
                 verified local impact projects. Transparent, milestone-based
                 funding on-chain.
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-3 mt-2">
-              <Button size="lg" onClick={onStart}>
-                Start a Project
-              </Button>
-              <Button size="lg" variant="secondary">
-                Fund Public Goods
-              </Button>
+            <div className="flex flex-wrap gap-3 mt-2 relative z-20">
+              {!isWalletConnected ? (
+                <Button
+                  size="lg"
+                  onClick={handleConnectWallet}
+                  className="cursor-pointer"
+                >
+                  Connect Wallet
+                </Button>
+              ) : (
+                <>
+                  <Button size="lg" onClick={handleStartProject}>
+                    Start a Project
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="secondary"
+                    onClick={handleFundPublicGoods}
+                  >
+                    Fund Public Goods
+                  </Button>
+                </>
+              )}
             </div>
           </div>
 

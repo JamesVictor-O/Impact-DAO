@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { usePrivy, useWallets } from "@privy-io/react-auth";
 import {
   Bell,
   ChevronDown,
@@ -16,24 +19,56 @@ import {
 export const SmeHeader: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
+  const { authenticated } = usePrivy();
+  const { wallets } = useWallets();
+
+  // Get the first connected wallet address
+  const walletAddress = useMemo(() => {
+    if (wallets && wallets.length > 0) {
+      return wallets[0].address;
+    }
+    return null;
+  }, [wallets]);
+
+  const formattedAddress = useMemo(() => {
+    if (!walletAddress) return "0x0000...0000";
+    return `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`;
+  }, [walletAddress]);
 
   const MOBILE_NAV = [
-    { label: "Dashboard", href: "/sme", icon: <LayoutDashboard className="h-4 w-4" /> },
-    { label: "Projects", href: "/sme/projects", icon: <FolderOpen className="h-4 w-4" /> },
-    { label: "Wallet", href: "/sme/wallet", icon: <Wallet className="h-4 w-4" /> },
-    { label: "Verification", href: "/sme/verification", icon: <ShieldCheck className="h-4 w-4" /> },
-    { label: "Settings", href: "/sme/settings", icon: <Settings className="h-4 w-4" /> },
+    {
+      label: "Dashboard",
+      href: "/sme",
+      icon: <LayoutDashboard className="h-4 w-4" />,
+    },
+    {
+      label: "Projects",
+      href: "/sme/projects",
+      icon: <FolderOpen className="h-4 w-4" />,
+    },
+    {
+      label: "Wallet",
+      href: "/sme/wallet",
+      icon: <Wallet className="h-4 w-4" />,
+    },
+    {
+      label: "Verification",
+      href: "/sme/verification",
+      icon: <ShieldCheck className="h-4 w-4" />,
+    },
+    {
+      label: "Settings",
+      href: "/sme/settings",
+      icon: <Settings className="h-4 w-4" />,
+    },
   ];
 
   return (
     <header className="relative flex items-center justify-between px-4 md:px-8 py-4 md:py-5 border-b border-surface-border bg-background-dark/80 backdrop-blur-md sticky top-0 z-10">
       <div className="flex items-center gap-3">
-        <div className="hidden sm:flex items-center justify-center rounded-full bg-primary/10 size-8 text-primary font-bold">
-          GL
-        </div>
         <div className="flex flex-col gap-1">
           <h2 className="text-white text-base md:text-xl font-bold font-display">
-            Welcome back, GreenLeaf
+            Welcome
           </h2>
           <p className="text-text-muted text-xs md:text-sm">
             Here&apos;s what&apos;s happening with your projects today.
@@ -47,13 +82,15 @@ export const SmeHeader: React.FC = () => {
           <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full border-2 border-surface-dark" />
         </button>
 
-        <button className="hidden sm:flex items-center gap-2 h-9 md:h-10 px-3 md:px-4 rounded-full bg-[#1c2720] border border-primary/30 text-white text-xs md:text-sm font-medium hover:bg-[#233028] transition-colors">
-          <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-          <span className="truncate font-mono text-[10px] md:text-xs">
-            0x4a...91B2
-          </span>
-          <ChevronDown size={16} className="text-text-muted" />
-        </button>
+        {authenticated && walletAddress && (
+          <button className="hidden sm:flex items-center gap-2 h-9 md:h-10 px-3 md:px-4 rounded-full bg-[#1c2720] border border-primary/30 text-white text-xs md:text-sm font-medium hover:bg-[#233028] transition-colors">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="truncate font-mono text-[10px] md:text-xs">
+              {formattedAddress}
+            </span>
+            <ChevronDown size={14} className="text-text-muted" />
+          </button>
+        )}
 
         {/* Mobile menu toggle */}
         <button
@@ -62,7 +99,11 @@ export const SmeHeader: React.FC = () => {
           onClick={() => setIsMobileMenuOpen((open) => !open)}
           aria-label="Toggle navigation"
         >
-          {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {isMobileMenuOpen ? (
+            <X className="h-5 w-5" />
+          ) : (
+            <Menu className="h-5 w-5" />
+          )}
         </button>
       </div>
 
@@ -96,4 +137,3 @@ export const SmeHeader: React.FC = () => {
     </header>
   );
 };
-

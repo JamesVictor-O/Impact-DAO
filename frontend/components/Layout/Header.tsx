@@ -1,27 +1,74 @@
-import React, { useState } from "react";
+"use client";
+
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import { Menu, X, User as UserIcon } from "lucide-react";
+import { usePrivy, useWallets, useLogin } from "@privy-io/react-auth";
 import { Button } from "../ui/button";
 import { User } from "../../types";
 
 interface HeaderProps {
-  isLoggedIn: boolean;
-  user: User | null;
-  onLogin: () => void;
-  onLogout: () => void;
+  isLoggedIn?: boolean;
+  user?: User | null;
+  onLogin?: () => void;
+  onLogout?: () => void;
   onNavigateHome: () => void;
 }
 
 const NAV_ITEMS = ["How it Works", "Explore Projects"];
 
 export const Header: React.FC<HeaderProps> = ({
-  isLoggedIn,
-  user,
-  onLogin,
-  onLogout,
+  isLoggedIn: propIsLoggedIn,
+  user: propUser,
+  onLogin: propOnLogin,
+  onLogout: propOnLogout,
   onNavigateHome,
 }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const {
+    ready,
+    authenticated,
+    user: privyUser,
+    logout: privyLogout,
+  } = usePrivy();
+  const { wallets } = useWallets();
+  const { login: privyLogin } = useLogin({
+    onComplete: () => {
+      // Call prop onLogin if provided
+      propOnLogin?.();
+      setIsMobileMenuOpen(false);
+    },
+    onError: (error) => {
+      console.error("Login error:", error);
+    },
+  });
+
+  // Use Privy state if available, otherwise fall back to props
+  const isLoggedIn = ready ? authenticated : propIsLoggedIn ?? false;
+  const user = privyUser
+    ? {
+        id: privyUser.id || "",
+        name: privyUser.twitter?.username || privyUser.email?.address || "User",
+        balance: 0,
+        portfolioValue: 0,
+      }
+    : propUser;
+
+  const handleLogin = () => {
+    if (ready) {
+      privyLogin();
+    } else {
+      propOnLogin?.();
+    }
+  };
+
+  const handleLogout = async () => {
+    if (ready && authenticated) {
+      await privyLogout();
+    }
+    propOnLogout?.();
+    setIsMobileMenuOpen(false);
+  };
 
   const handleToggleMobile = () => setIsMobileMenuOpen((open) => !open);
 
@@ -30,6 +77,13 @@ export const Header: React.FC<HeaderProps> = ({
     if (href === "#") return;
   };
 
+  // Get wallet address if available
+  const walletAddress = wallets[0]?.address;
+ 
+   const formattedAddress = useMemo(() => {
+     if (!walletAddress) return "0x0000...0000";
+     return `${walletAddress.slice(0, 6)}...${walletAddress.slice(-4)}`;
+   }, [walletAddress]);
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap  dark:border-border-dark bg-background-light/80 dark:bg-[#111814]/80 backdrop-blur-md px-4 py-3 md:px-8 lg:px-10">
       <button
@@ -41,9 +95,9 @@ export const Header: React.FC<HeaderProps> = ({
           <Image
             src="/Logo.png"
             alt="ImpactDAO logo"
-            width={32}
-            height={32}
-            className="h-8 w-auto"
+            width={100}
+            height={100}
+            className="h-full w-full object-cover"
             priority
           />
         </div>
@@ -81,22 +135,18 @@ export const Header: React.FC<HeaderProps> = ({
         {isLoggedIn && user ? (
           <div className="flex items-center gap-4">
             <div className="hidden md:flex flex-col items-end">
-              <span className="text-[11px] text-slate-500 dark:text-text-grey">
-                Connected
-              </span>
-              <span className="text-sm font-medium text-slate-900 dark:text-white">
-                {user.name}
+             
+              <span className="text-sm font-medium text-slate-900 dark:text-white truncate max-w-[150px]">
+                {formattedAddress}
               </span>
             </div>
-            <div className="h-8 w-8 rounded-full bg-linear-to-tr from-primary to-emerald-500 flex items-center justify-center border border-white/20">
-              <UserIcon className="h-4 w-4 text-white" />
-            </div>
-            <Button variant="ghost" size="sm" onClick={onLogout}>
+           
+            <Button variant="ghost" size="sm" onClick={handleLogout}>
               Disconnect
             </Button>
           </div>
         ) : (
-          <Button size="sm" onClick={onLogin}>
+          <Button size="sm" onClick={handleLogin} disabled={!ready}>
             Connect Wallet
           </Button>
         )}
@@ -144,11 +194,19 @@ export const Header: React.FC<HeaderProps> = ({
 
           <div className="pt-3 border-t border-slate-200/70 dark:border-border-dark flex flex-col gap-3">
             {isLoggedIn ? (
-              <Button className="w-full" variant="outline" onClick={onLogout}>
+              <Button
+                className="w-full"
+                variant="outline"
+                onClick={handleLogout}
+              >
                 Disconnect
               </Button>
             ) : (
-              <Button className="w-full" onClick={onLogin}>
+              <Button
+                className="w-full"
+                onClick={handleLogin}
+                disabled={!ready}
+              >
                 Connect Wallet
               </Button>
             )}

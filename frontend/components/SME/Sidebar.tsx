@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Image from "next/image";
 import {
   LayoutDashboard,
   FolderOpen,
@@ -8,7 +9,6 @@ import {
   ShieldCheck,
   Settings,
   PlusCircle,
-  BadgeCheck,
 } from "lucide-react";
 
 interface NavItem {
@@ -43,24 +43,24 @@ export const SmeSidebar: React.FC = () => {
     <aside className="w-72 hidden lg:flex flex-col bg-surface-dark border-r border-surface-border h-full justify-between p-4 z-20">
       <div className="flex flex-col gap-6">
         {/* Profile / Brand */}
-        <div className="flex items-center gap-3 px-2">
-          <div
-            className="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-12 border-2 border-primary/20 shrink-0"
-            style={{
-              backgroundImage:
-                'url("https://lh3.googleusercontent.com/aida-public/AB6AXuACngjfVYynk-BcCo43K1TsYEKkNRFU0OPycVl7vlCbMh_YxMTuboOgdpumj6aicZhm8mt-Ook-CrYi_Ps_v4VDffnL_0qP3lpNN1wbhr-byCwb4tDBYJiEIaT9KtSX4F5eAsv_lYU3q8hjyv3AkcxYHG7zCFm33K1u_XLTFoR7_4_OdOuX2euxGIsdHIrK2ai77AKJJ-alXT3Yy4zut6WHes_Tc_vEnJgaS8ZK0NvfhuI7E52wTApF01A6aYrBZ2Q4KJIwf7XNunsP")',
-            }}
-          />
+        <div className="flex gap-3 items-center px-2">
+          <div className="aspect-square rounded-full size-10 overflow-hidden bg-background-dark flex items-center justify-center">
+            <Image
+              src="/Logo.png"
+              alt="ImpactDAO logo"
+              width={40}
+              height={40}
+              className="h-8 w-auto"
+              priority
+            />
+          </div>
           <div className="flex flex-col">
-            <h1 className="text-white text-base font-bold leading-normal font-display">
-              GreenLeaf
+            <h1 className="text-white text-lg font-bold leading-none tracking-tight">
+              ImpactDAO
             </h1>
-            <div className="flex items-center gap-1">
-              <BadgeCheck className="w-3.5 h-3.5 text-primary" />
-              <p className="text-text-muted text-xs font-medium leading-normal">
-                Verified SME
-              </p>
-            </div>
+            <p className="text-text-muted text-xs font-normal mt-1">
+              Quadratic Funding
+            </p>
           </div>
         </div>
 

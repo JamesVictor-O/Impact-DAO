@@ -5,17 +5,11 @@ export const ProjectHero: React.FC = () => {
     <div className="w-full flex flex-col gap-4 md:gap-6 mb-6 md:mb-8">
       {/* Breadcrumbs */}
       <div className="flex flex-wrap items-center gap-1.5 text-xs md:text-sm">
-        <a
-          className="text-text-muted hover:text-primary font-medium"
-          href="#"
-        >
+        <a className="text-text-muted hover:text-primary font-medium" href="#">
           Home
         </a>
         <span className="text-text-muted">/</span>
-        <a
-          className="text-text-muted hover:text-primary font-medium"
-          href="#"
-        >
+        <a className="text-text-muted hover:text-primary font-medium" href="#">
           Environment
         </a>
         <span className="text-text-muted">/</span>
@@ -61,6 +55,3 @@ export const ProjectHero: React.FC = () => {
     </div>
   );
 };
-
-
-

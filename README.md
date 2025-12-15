@@ -1,11 +1,11 @@
-# Proof of Impact: Democratizing Local Public Goods Funding
+# ImpactProof: Democratizing Local Public Goods Funding
 
-> Connecting Small and Medium Enterprises (SMEs) with their local communities to fund essential public goods through verifiable, community-driven impact investment.
+> Connecting Small and Medium Enterprises (SMEs) with their local communities to fund essential public goods through verifiable, community driven impact investment built on the Base Blockchain.
 
 ---
 
 ## 🎯 Mission
-Proof of Impact connects small and medium enterprises (SMEs) with their local communities to fund essential public goods that traditional financing overlooks—from open-source software integration to sustainability initiatives and community projects.
+ImpactProof  connects small and medium enterprises (SMEs) with their local communities to fund essential public goods that traditional financing overlooks—from open-source software integration to sustainability initiatives and community projects.
 
 ## 💡 The Problem
 Small businesses and independent creators face critical barriers when trying to fund non-revenue-generating projects:
@@ -28,7 +28,7 @@ Proof of Impact is a decentralized platform that enables **quadratic funding** f
 4.  **Verification Layer:** Independent validators (community multi-sig or oracle network) verify milestone completion.
 5.  **Automated Release:** Upon successful on-chain verification, smart contracts automatically release funds to the SME.
 6.  **Impact Transparency:** All funding transactions and verification events are publicly auditable on-chain.
-
+7.  **Base Blockchain** all countract are deployed on the base blockchain leveraging the base fast transaction and cheap gas fee.
 ## ✨ Key Features
 
 ### For SMEs

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Manrope, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { FarcasterReadyProvider } from "../components/FarcasterReadyProvider";
+import { PrivyProvider } from "../components/PrivyProvider";
 
 const bodyFont = Manrope({
   variable: "--font-body",
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body
         className={`${bodyFont.variable} ${displayFont.variable} antialiased`}
       >
-        <FarcasterReadyProvider>{children}</FarcasterReadyProvider>
+        <PrivyProvider>
+          <FarcasterReadyProvider>{children}</FarcasterReadyProvider>
+        </PrivyProvider>
       </body>
     </html>
   );
